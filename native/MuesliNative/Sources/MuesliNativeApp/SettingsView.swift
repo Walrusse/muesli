@@ -2458,6 +2458,7 @@ struct SettingsView: View {
             accessibilityGranted: accessibilityGranted,
             inputMonitoringGranted: inputMonitoringGranted
         )
+        controller.completePendingPushToTalkEnableIfReady()
         refreshSystemAudioPermissionIfNeeded()
     }
 

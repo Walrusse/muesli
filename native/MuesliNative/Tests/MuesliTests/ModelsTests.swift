@@ -1815,6 +1815,17 @@ struct AppConfigTests {
         #expect(!OnboardingUseCase.voiceNotes.canSwitchToVoiceNotesOnly)
     }
 
+    @Test("meetings-only can opt into push-to-talk without dropping meetings")
+    func meetingsOnlyCanEnablePushToTalk() {
+        #expect(!OnboardingUseCase.meetings.includesPushToTalk)
+        #expect(OnboardingUseCase.meetings.enablingPushToTalk == .dictationAndMeetings)
+        #expect(OnboardingUseCase.meetings.enablingPushToTalk.includesPushToTalk)
+        #expect(OnboardingUseCase.meetings.enablingPushToTalk.includesMeetings)
+        #expect(OnboardingUseCase.dictation.enablingPushToTalk == .dictation)
+        #expect(OnboardingUseCase.voiceNotes.enablingPushToTalk == .voiceNotes)
+        #expect(OnboardingUseCase.dictationAndMeetings.enablingPushToTalk == .dictationAndMeetings)
+    }
+
     @Test("scheduled meeting notifications inherit legacy detection opt-out")
     func scheduledMeetingNotificationsInheritLegacyDetectionOptOut() throws {
         let json = """
